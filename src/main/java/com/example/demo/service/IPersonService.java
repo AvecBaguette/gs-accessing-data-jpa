@@ -7,7 +7,7 @@ import java.util.List;
 public interface IPersonService {
 
 
-    public List<Person> findAll();
+    List<Person> findAll();
 
-    public void updatePerson(Person person);
+    void updatePerson(Person person);
 }

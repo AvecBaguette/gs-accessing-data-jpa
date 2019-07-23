@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Spring Framework Demo</title>
+</head>
+
+<body>
+<h1>Person list</h1>
+
+<table>
+    <tr>
+        <th>name</th>
+        <th>birth_date</th>
+    </tr>
+
+    <tr th:each="person: ${persons}">
+        <td th:text="${person.name}">Eric</td>
+        <td th:text="${person.birthDate}">1999-12-23</td>
+
+    </tr>
+
+</table>
+
+</body>
+
+
+
+</html>
