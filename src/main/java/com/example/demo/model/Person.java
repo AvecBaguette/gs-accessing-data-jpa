@@ -1,42 +1,58 @@
 package com.example.demo.model;
 
-import org.springframework.data.annotation.Id;
 
+import javafx.util.converter.TimeStringConverter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Type;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.TooManyListenersException;
 
 @Entity
-public class Person {
+public class Person implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column
     private String name;
+    @Column
     private LocalDate birthDate;
+    @Version
+    @Type(type="dbtimestamp")
+    private Timestamp timeStamp;
 
-    protected Person() {
+    public Person() {
     }
 
-
     public Person(Long id, String name, LocalDate birthDate) {
+
         this.id = id;
         this.name = name;
         this.birthDate = birthDate;
     }
 
-
-    public static Person create(String name, LocalDate birthDate) {
-        return new Person(null, name, birthDate);
+    public Person(String name, LocalDate birthDate) {
+        this.name = name;
+        this.birthDate = birthDate;
     }
 
-    void setId(Long id) {
+    public void setIdd(Long id) {
         this.id = id;
     }
 
-    public long getId() {
+
+    public Long getId() {
         return this.id;
     }
 
-    void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -44,14 +60,22 @@ public class Person {
         return this.name;
     }
 
-    void setBirthDate(LocalDate birthDate) {
+
+    public void setTimeStamp(Timestamp timeStamp){
+        this.timeStamp=timeStamp;
+    }
+
+    public Timestamp getTimeStamp(){
+        return timeStamp;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 
     public LocalDate getBirthDate() {
         return this.birthDate;
     }
-
 
     @Override
     public String toString() {

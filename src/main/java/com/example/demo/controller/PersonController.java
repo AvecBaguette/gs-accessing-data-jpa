@@ -1,48 +1,43 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.Person;
-import com.example.demo.repository.PersonRepository;
-import com.example.demo.service.IPersonService;
 import com.example.demo.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
+import java.util.*;
 
 @RestController
 public class PersonController {
 
+    private PersonService personService;
 
-    IPersonService personService;
-
+    @Autowired
     public PersonController(PersonService personService) {
         this.personService = personService;
     }
 
-    public List<Person> getPersons() {
-        return personService.findAll();
+    @GetMapping("/persons")
+    public List<Person> showPersons() {
+        if(personService.isDBEmpty()) {
+            return this.personService.saveFromUrl();
+        }
+        return this.personService.fromDB();
     }
 
-    public void savePerson(Person person) {
-        personService.updatePerson(person);
-    }
 
 
-    /*PersonRepository personRepository;
+        /*List<Person> personList= personService.findAll();
 
-    public PersonController(PersonRepository personRepository){
-        this.personRepository=personRepository;
-    }
-    @RequestMapping("/persons")
-    public String getPersons(Model model){
-        model.addAttribute("persons", personRepository.findAll());
-        return "persons";
-    }*/
+        String body=personList
+                .stream()
+                .map(e -> e.toString())
+                .collect(Collectors.joining(","));
 
+
+
+        return body;
+        */
+
+//    }
 
 }

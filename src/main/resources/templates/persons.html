@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
+    <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8"/>
     <title>Spring Framework Demo</title>
 </head>
 
@@ -14,16 +14,16 @@
         <th>birth_date</th>
     </tr>
 
-    <tr th:each="person: ${persons}">
-        <td th:text="${person.name}">Eric</td>
-        <td th:text="${person.birthDate}">1999-12-23</td>
+    <tr th:each="person : ${persons}">
+        <td th:text="${person.name}"></td>
+        <td th:text="${person.birthDate}"></td>
+        <td th:text="${person.timeStamp}"></td>
 
     </tr>
 
 </table>
 
 </body>
-
 
 
 </html>
